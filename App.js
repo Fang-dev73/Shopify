@@ -15,8 +15,11 @@ import Splash from './src/screens/auth/Splash';
 import SignUp from './src/screens/auth/SignUp';
 import SignIn from './src/screens/auth/SignIn';
 import Config from 'react-native-config';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function App() {
+function App({navigation}) {
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -26,10 +29,16 @@ function App() {
     });
   }, [])
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View>
-      <SignIn/>
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import  React, {useState} from 'react';
 import { Image, SafeAreaView, Text, Touchable, TouchableOpacity, View } from 'react-native';
 import AuthHeader from '../../../components/AuthHeader';
 import Input from '../../../components/Input';
@@ -6,7 +6,7 @@ import Checkbox from '../../../components/CheckBox';
 import Button  from '../../../components/Button';
 import GoogleLogin from '../../../components/GoogleLogin';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
     const [checked, setChecked] = useState(false)
 
     return (
@@ -24,7 +24,7 @@ const SignIn = () => {
             <GoogleLogin/>
             <View style={{justifyContent: 'center',alignItems: 'center', flexDirection: 'row'}}>
             <Text style={{fontSize: 15, fontWeight: '400', color: 'black'}}>Don't have an account? </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: 'navy'}}>Sign Up</Text>
             </TouchableOpacity>
             </View>
