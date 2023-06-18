@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native'
 import Header from '../../../components/Header'
 import { categories } from '../../../data/categories'
@@ -8,38 +8,65 @@ import Products from '../../../components/Products'
 
 const Home = () => {
 
-  const [selectedCategory, setSelectedCategory] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState()
+  const [keyword, setKeyword] = useState()
+  const [filteredProduct, setFilteredProduct] = useState(products)
+
+  useEffect(() => {
+    if (selectedCategory && !keyword) {
+      const updatedProducts = products.filter(product => product?.category === selectedCategory)
+      setFilteredProduct(updatedProducts)
+    }
+    else if (selectedCategory && keyword) {
+      const updatedProducts = products.filter(product => product?.category === selectedCategory && product?.title?.toLowerCase().includes(keyword?.toLowerCase()))
+      setFilteredProduct(updatedProducts)
+    }
+    else if (!selectedCategory && keyword) {
+      const updatedProducts = products.filter(product => product?.title?.toLowerCase().includes(keyword?.toLowerCase()))
+      setFilteredProduct(updatedProducts)
+    }
+    else {
+      setFilteredProduct(products)
+    }
+  }, [selectedCategory, keyword])
+
+  console.log("Keyword>>>>>>", keyword);
+
 
   const categoryList = ({ item, index }) => {
-    console.log("Item>>>>>>>>>>", item)
     return (
-      <CategoryBox isSelected = {item?.id === selectedCategory}  onPress={() => setSelectedCategory(item?.id)} isFirst={index === 0} title={item?.title} image={selectedCategory === item?.id ? item?.image2 : {uri: item?.image}}/>
+      <CategoryBox
+        isSelected={item?.id === selectedCategory}
+        onPress={() => setSelectedCategory(item?.id)}
+        isFirst={index === 0}
+        title={item?.title}
+        image={selectedCategory === item?.id ? item?.image2 : { uri: item?.image }} />
     )
   }
 
-  const productList = ({item}) => {
-    return  (
-      <Products {...item}/>
+  const productList = ({ item }) => {
+    return (
+      <Products {...item} />
     )
   }
 
   return (
     <ScrollView>
-      <Header showSearch title={'Find All you Need'} showLogout />
+      <Header keyword={keyword} onSearch={setKeyword} showSearch title={'Find All you Need'} showLogout />
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.categoryList}
         data={categories}
         renderItem={categoryList}
-        keyExtractor={(item, index) => String(index)} 
+        keyExtractor={(item, index) => String(index)}
       />
-      <FlatList 
+      <FlatList
         style={styles.productList}
         numColumns={2}
-        data={products}
+        data={filteredProduct}
         renderItem={productList}
-        ListFooterComponent = {<View style={{ height: 20}}/>}
+        ListFooterComponent={<View style={{ height: 20 }} />}
       />
     </ScrollView>
   )
@@ -47,8 +74,8 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   categoryList: {
-    paddingVertical: 24,
-  }, 
+    paddingVertical: 10,
+  },
   productList: {
     paddingHorizontal: 10
   }

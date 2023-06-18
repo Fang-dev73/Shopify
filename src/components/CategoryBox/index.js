@@ -7,7 +7,7 @@ const CategoryBox = ({ title, image, onPress, isFirst, isSelected, image2 }) => 
             <View style={[styles.imageContainer, isSelected ? {backgroundColor: 'navy'} : {backgroundColor: 'white'}]}>
                 <Image style={styles.image} source={image} />
             </View>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title, isSelected ? {color: 'navy'} : {}, isSelected ? {fontSize: 14} : {}]}>{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'black',
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: '500'
     },
     image: {

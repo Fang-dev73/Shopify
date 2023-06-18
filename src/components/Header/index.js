@@ -4,7 +4,7 @@ import { Button } from '../../../components/Button';
 import styles from './styles';
 import Input from '../Input';
 
-const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, showSearch }) => {
+const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, showSearch, keyword }) => {
     const [showSearchInput, setShowSearchInput] = useState(false);
 
     const onSearchClick = () => {
@@ -12,7 +12,7 @@ const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, 
     }
 
     return (
-        <View>
+        <View style={styles.mainContainer}>
             <View style={styles.container}>
                 {showBack ?
                     <Pressable hitSlop={20} onPress={onBackPress}>
@@ -32,7 +32,7 @@ const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, 
                 }
             </View>
             {showSearchInput ?
-                <Input placeholder={'Search'} />
+                <Input value={keyword} onChangeText={onSearch}  placeholder={'Search'} />
                 : null
             }
         </View>

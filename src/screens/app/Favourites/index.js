@@ -1,13 +1,22 @@
 import React from 'react'
-import { View, ScrollView, Text } from 'react-native'
+import { View, ScrollView, Text, FlatList } from 'react-native'
+import { products } from '../../../data/products';
+import FavouriteItem from '../../../components/FavouriteItem';
+import Header from '../../../components/Header';
 
 const Favourites = () => {
+
+  const favouritesList = ({ item }) => {
+    return (
+      <FavouriteItem {...item} />
+    )
+  }
+
   return (
-      <ScrollView>
-        <Text>
-          Favourites
-        </Text>
-      </ScrollView>
+    <ScrollView>
+      <Header title={'Favourites'}/>
+      <FlatList keyExtractor={(item) => String(item?.id)} data={products} renderItem={favouritesList} />
+    </ScrollView>
   )
 }
 

@@ -84,7 +84,7 @@ function App({ navigation }) {
     <NavigationContainer theme={theme}>
       <Stack.Navigator>
         {isSignedIn ?
-          <Stack.Screen name="Tabs" component={Tabs} />
+          <Stack.Screen options={{headerShown: false}} name="Tabs" component={Tabs} />
           :
           <>
             <Stack.Screen name="Splash" component={Splash} />

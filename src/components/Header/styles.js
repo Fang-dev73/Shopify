@@ -2,12 +2,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        paddingHorizontal: 25,
+        paddingVertical: 20,
+    },
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 25,
-        paddingVertical: 10,
+        justifyContent: 'space-between',   
     },
     title: {
         color: 'black',
