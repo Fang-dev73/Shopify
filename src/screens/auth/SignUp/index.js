@@ -12,7 +12,6 @@ const SignUp = ({navigation}) => {
 
     return (
         <ScrollView>
-            <AuthHeader title={'Sign Up'} />
             <Input label={'Name'} placeholder={'Enter your name'} />
             <Input label={'Email'} placeholder={'example@gmail.com'} />
             <Input isPasssword={true} label={'Password'} placeholder={'Enter your password'} />

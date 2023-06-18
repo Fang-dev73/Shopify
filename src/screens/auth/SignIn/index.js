@@ -11,7 +11,6 @@ const SignIn = ({navigation}) => {
 
     return (
         <View>
-            <AuthHeader title={'Sign In'} />
             <Input label={'Email'} placeholder={'example@gmail.com'} />
             <Input isPasssword={true} label={'Password'} placeholder={'Enter your password'} />
             <Checkbox checked={checked} onCheck={() => { setChecked(!checked) }} />

@@ -5,9 +5,9 @@ const Input = ({ label, placeholder, isPasssword }) => {
     const [isPassswordVisible, setIsPasswordVisible] = useState(false)
 
     return (
-        <View style={{ padding: 15 }}>
+        <View style={{marginHorizontal: 10, marginVertical: 15}}>
             <Text style={{ fontWeight: 'bold', fontSize: 18, color: 'navy' }}>{label}</Text>
-            <View style={{ width: '100%', height: 50, borderColor: 'black', borderWidth: 1, marginTop: 15, borderRadius: 10 }}>
+            <View style={{ width: '100%', height: 50, borderColor: 'black', borderWidth: 1, borderRadius: 10 }}>
                 <TextInput secureTextEntry={isPasssword && !isPassswordVisible} placeholder={placeholder} />
                 {isPasssword &&
                     <Pressable onPress={() => { setIsPasswordVisible(!isPassswordVisible) }}>

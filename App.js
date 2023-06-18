@@ -9,17 +9,62 @@ import React, { useEffect } from 'react';
 import {
   StyleSheet,
   View,
+  Image
 } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Splash from './src/screens/auth/Splash';
 import SignUp from './src/screens/auth/SignUp';
 import SignIn from './src/screens/auth/SignIn';
+import Home from './src/screens/app/Home';
+import Favourites from './src/screens/app/Favourites';
+import Profile from './src/screens/app/Profile';
 import Config from 'react-native-config';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function App({navigation}) {
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const Tabs = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused
+              ? require('./src/assets/home_covered.png')
+              : require('./src/assets/home.png')
+          } else if (route.name === 'Favourites') {
+            iconName = focused
+              ? require('./src/assets/star_covered.png')
+              : require('./src/assets/star.png')
+          }
+          else
+            iconName = focused
+              ? require('./src/assets/user_covered.png')
+              : require('./src/assets/user.png')
+
+          // You can return any component that you like here!
+          return <Image style={{ width: 30, height: 30 }} source={iconName} />;
+        },
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: { borderTopColor: 'grey', borderTopWidth: 0.4, backgroundColor: 'white', marginVertical: 2, height: '9%'}
+      })}
+    >
+      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name="Favourites" component={Favourites} options={{ headerShown: false }} />
+      <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+    </Tab.Navigator>
+  )
+}
+
+function App({ navigation }) {
+  const isSignedIn = true
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -29,16 +74,26 @@ function App({navigation}) {
     });
   }, [])
 
-  const Stack = createNativeStackNavigator();
+  const theme = {
+    colors: {
+      background: 'white'
+    }
+  }
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="SignIn" component={SignIn} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator>
+        {isSignedIn ?
+          <Stack.Screen name="Tabs" component={Tabs} />
+          :
+          <>
+            <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+          </>
+        }
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
