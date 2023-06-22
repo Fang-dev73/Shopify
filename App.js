@@ -23,6 +23,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ProductDetails from './src/screens/app/ProductDetails';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,7 +54,7 @@ const Tabs = () => {
         },
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { borderTopColor: 'grey', borderTopWidth: 0.4, backgroundColor: 'white', marginVertical: 2, height: '9%'}
+        tabBarStyle: { borderTopColor: 'grey', borderTopWidth: 0.4, backgroundColor: 'white', marginVertical: 2, height: '9%' }
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
@@ -84,7 +85,10 @@ function App({ navigation }) {
     <NavigationContainer theme={theme}>
       <Stack.Navigator>
         {isSignedIn ?
-          <Stack.Screen options={{headerShown: false}} name="Tabs" component={Tabs} />
+          <>
+            <Stack.Screen options={{ headerShown: false }} name="Tabs" component={Tabs} />
+            <Stack.Screen options={{ headerShown: false }} name="ProductDetails" component={ProductDetails} />
+          </>
           :
           <>
             <Stack.Screen name="Splash" component={Splash} />

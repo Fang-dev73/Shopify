@@ -6,7 +6,7 @@ import CategoryBox from '../../../components/CategoryBox'
 import { products } from '../../../data/products'
 import Products from '../../../components/Products'
 
-const Home = () => {
+const Home = ({navigation}) => {
 
   const [selectedCategory, setSelectedCategory] = useState()
   const [keyword, setKeyword] = useState()
@@ -45,8 +45,11 @@ const Home = () => {
   }
 
   const productList = ({ item }) => {
+    const singleProduct = (product) => {
+      navigation.navigate("ProductDetails", {product: product})
+    }
     return (
-      <Products {...item} />
+      <Products onPress={() => singleProduct(item)} {...item} />
     )
   }
 
