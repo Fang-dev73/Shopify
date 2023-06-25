@@ -9,12 +9,9 @@ const ProductDetails = ({ navigation, route }) => {
     const [bookMark, setBookMark] = useState(false)
 
     const onContact = () => {
-        const phone = 9619494534
-        Linking.openURL(`tel: ${phone}`);
         const mail = 'narulayash994@gmail.com'
         Linking.openURL(`mailto: ${mail}`)
     }
-
 
     return (
         <SafeAreaView>

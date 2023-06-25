@@ -24,9 +24,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProductDetails from './src/screens/app/ProductDetails';
+import Settings from './src/screens/app/Settings';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = () => {
+  return(
+  <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
+      <Stack.Screen options={{ headerShown: false }} name="Settings" component={Settings} />
+  </Stack.Navigator>
+  )
+}
 
 const Tabs = () => {
   return (
@@ -59,7 +69,7 @@ const Tabs = () => {
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="Favourites" component={Favourites} options={{ headerShown: false }} />
-      <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Tab.Screen name="ProfileStack" component={ProfileStack} options={{ headerShown: false }} />
     </Tab.Navigator>
   )
 }
