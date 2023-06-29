@@ -25,7 +25,7 @@ const Profile = ({navigation}) => {
           <ListItem title={'My Listings'} subtitle={`You have ${num} listings`} />
           <ListItem onPress={onSettingPress} title={'Settings'} subtitle={`You have ${num} listings`} />
         </View>
-        <Button title={'Add New Listing'}/>
+        <Button onPress= {() => navigation.navigate('CreateListing')} title={'Add New Listing'}/>
       </ScrollView>
     </View>
   )
