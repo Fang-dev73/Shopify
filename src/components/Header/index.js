@@ -4,7 +4,7 @@ import { Button } from '../../../components/Button';
 import styles from './styles';
 import Input from '../Input';
 
-const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, showSearch, keyword }) => {
+const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, showSearch, keyword, style }) => {
     const [showSearchInput, setShowSearchInput] = useState(false);
 
     const onSearchClick = () => {
@@ -15,7 +15,7 @@ const Header = ({ title, onBackPress, onSearch, onLogout, showLogout, showBack, 
         <View style={styles.mainContainer}>
             <View style={styles.container}>
                 {showBack ?
-                    <Pressable hitSlop={20} onPress={onBackPress}>
+                    <Pressable style={style} hitSlop={20} onPress={onBackPress}>
                         <Image style={styles.image} source={{ uri: 'https://cdn-icons-png.flaticon.com/512/93/93634.png' }} />
                     </Pressable>
                     :

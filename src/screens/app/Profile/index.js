@@ -22,7 +22,7 @@ const Profile = ({navigation}) => {
         <View style={styles.content}>
           <Text style={styles.name}>User Name</Text>
           <Text style={styles.email}>User Email</Text>
-          <ListItem title={'My Listings'} subtitle={`You have ${num} listings`} />
+          <ListItem onPress={() => navigation.navigate('MyListings')} title={'My Listings'} subtitle={`You have ${num} listings`} />
           <ListItem onPress={onSettingPress} title={'Settings'} subtitle={`You have ${num} listings`} />
         </View>
         <Button onPress= {() => navigation.navigate('CreateListing')} title={'Add New Listing'}/>

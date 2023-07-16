@@ -26,6 +26,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProductDetails from './src/screens/app/ProductDetails';
 import Settings from './src/screens/app/Settings';
 import CreateListing from './src/screens/app/CreateListing';
+import MyListings from './src/screens/app/MyListings';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,7 +37,7 @@ const ProfileStack = () => {
       <Stack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
       <Stack.Screen options={{ headerShown: false }} name="Settings" component={Settings} />
       <Stack.Screen options={{ headerShown: false }} name="CreateListing" component={CreateListing} />
-
+      <Stack.Screen options={{ headerShown: false }} name="MyListings" component={MyListings} />
   </Stack.Navigator>
   )
 }

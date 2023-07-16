@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const FavouriteItem = ({ title, image, onPress, price }) => {
+const FavouriteItem = ({ title, image, onPress, price, icon }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             <Image style={styles.image} source={{ uri: image }} />
@@ -9,7 +9,7 @@ const FavouriteItem = ({ title, image, onPress, price }) => {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.price}>{price}</Text>
             </View>
-            <Image style={styles.icon} source={require('../../assets/remove.png')}/>
+            <Image style={styles.icon} source={icon || require('../../assets/remove.png')} />
         </TouchableOpacity>
     )
 }
@@ -43,8 +43,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     icon: {
-        width: 22, 
+        width: 22,
         height: 22,
+        resizeMode: 'contain',
         marginVertical: 5,
         marginHorizontal: 5
     },
